@@ -1,0 +1,62 @@
+<div class="form-container">
+  <h2 mat-dialog-title>Agregar Nueva Propiedad</h2>
+  <mat-dialog-content>
+    <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="street" placeholder="Ej: Av. Arequipa 123, Miraflores">
+        <mat-spinner *ngIf="isLoading" matSuffix [diameter]="20"></mat-spinner>
+      </mat-form-field>
+
+      <mat-list *ngIf="searchResults.length > 0">
+        <mat-list-item *ngFor="let result of searchResults" (click)="selectAddress(result)" class="search-result-item">
+          <mat-icon matListItemIcon>location_on</mat-icon>
+          <div >{{ result.display_name }}</div>
+        </mat-list-item>
+      </mat-list>
+
+      <div class="map-wrapper">
+        <app-property-map [properties]="mapProperty"></app-property-map>
+      </div>
+
+      <div class="coords-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Latitud</mat-label>
+          <input matInput formControlName="latitude" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Longitud</mat-label>
+          <input matInput formControlName="longitude" readonly>
+        </mat-form-field>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Número</mat-label>
+        <input matInput formControlName="number" placeholder="123 / s/n">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Distrito</mat-label>
+        <input matInput formControlName="district">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Región/Provincia</mat-label>
+        <input matInput formControlName="region">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Pais</mat-label>
+        <input matInput formControlName="country" placeholder="Ej: Perú">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Postal Code</mat-label>
+        <input matInput formControlName="postalCode" placeholder="Ej: 15074">
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="propertyForm.invalid || isLoading" (click)="onSubmit()">
+      {{ isLoading ? 'Guardando...' : 'Guardar Propiedad' }}
+    </button>
+  </mat-dialog-actions>
+</div>

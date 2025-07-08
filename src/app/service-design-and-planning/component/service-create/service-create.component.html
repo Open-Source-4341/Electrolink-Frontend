@@ -1,0 +1,109 @@
+<mat-card>
+  <mat-card-title>Crear Servicio</mat-card-title>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()" #serviceForm="ngForm">
+
+      <!-- Nombre -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput required [(ngModel)]="service.name" name="name">
+      </mat-form-field>
+
+      <!-- Descripción -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput required [(ngModel)]="service.description" name="description"></textarea>
+      </mat-form-field>
+
+      <!-- Precio base -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Precio Base</mat-label>
+        <input matInput type="number" required [(ngModel)]="service.basePrice" name="basePrice">
+      </mat-form-field>
+
+      <!-- Tiempo estimado -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Tiempo Estimado</mat-label>
+        <input matInput required [(ngModel)]="service.estimatedTime" name="estimatedTime">
+      </mat-form-field>
+
+      <!-- Categoría -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Categoría</mat-label>
+        <input matInput required [(ngModel)]="service.category" name="category">
+      </mat-form-field>
+
+      <!-- Visible -->
+      <mat-checkbox [(ngModel)]="service.isVisible" name="isVisible">¿Visible?</mat-checkbox>
+
+      <!-- Creado por -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Creado por (userId)</mat-label>
+        <input matInput required [(ngModel)]="service.createdBy" name="createdBy">
+      </mat-form-field>
+
+        <h4>Política</h4>
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Condiciones</mat-label>
+        <input matInput [(ngModel)]="service.policy.conditions" name="policyConditions">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Tarifa de cancelación</mat-label>
+        <input matInput type="number" [(ngModel)]="service.policy.cancellationFee" name="cancellationFee">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Porcentaje de reembolso</mat-label>
+        <input matInput type="number" [(ngModel)]="service.policy.refundPercentage" name="refundPercentage">
+        </mat-form-field>
+
+        <h4>Restricciones</h4>
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Distritos no disponibles (separados por coma)</mat-label>
+            <input matInput [(ngModel)]="restrictionDistricts" name="unavailableDistricts">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Días prohibidos (separados por coma)</mat-label>
+            <input matInput [(ngModel)]="restrictionDays" name="forbiddenDays">
+        </mat-form-field>
+
+        <mat-checkbox [(ngModel)]="service.restriction.requiresSpecialCertification" name="requiresSpecialCertification"> Requiere certificación especial</mat-checkbox>
+
+      <!-- Tags -->
+      <h4>Tags</h4>
+      <div *ngFor="let tag of service.tags; let i = index">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Tag {{ i + 1 }}</mat-label>
+            <input matInput [(ngModel)]="service.tags[i].value" name="tag-{{i}}">
+        </mat-form-field>
+      </div>
+      <button mat-stroked-button type="button" color="accent" (click)="addTag()">+ Agregar Tag</button>
+
+      <!-- Components -->
+      <h4>Componentes</h4>
+      <div *ngFor="let comp of service.components; let i = index">
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Component ID</mat-label>
+          <input matInput type="number" [(ngModel)]="service.components[i].componentId" name="componentId-{{i}}">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="half-width">
+          <mat-label>Cantidad</mat-label>
+          <input matInput type="number" [(ngModel)]="service.components[i].quantity" name="quantity-{{i}}">
+        </mat-form-field>
+      </div>
+      <button mat-stroked-button type="button" color="accent" (click)="addComponent()">+ Agregar Componente</button>
+
+      <!-- Botón enviar -->
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit">Crear Servicio</button>
+      </div>
+
+      <!-- Mensaje -->
+      <p *ngIf="message">{{ message }}</p>
+
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,16 @@
+<!-- Authentication Section content switches based on isSignedIn -->
+<div *ngIf="isSignedIn; then authenticated else anonymous"></div>
+
+<!-- 🔐 When user is authenticated -->
+<ng-template #authenticated>
+  <span class="mat-body">Welcome, {{ currentUserName }}</span>
+  |
+  <button mat-button (click)="onSignOut()">Sign Out</button>
+</ng-template>
+
+<!-- 👤 When user is not signed in -->
+<ng-template #anonymous>
+  <button mat-button (click)="onSignIn()">Sign In</button>
+  |
+  <button mat-button (click)="onSignUp()">Sign Up</button>
+</ng-template>

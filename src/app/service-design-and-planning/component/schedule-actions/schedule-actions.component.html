@@ -1,0 +1,32 @@
+<!-- Botones de acción -->
+<div class="button-group">
+  <button mat-raised-button color="primary" (click)="action = CREATE_ACTION">Crear horario</button>
+  <button mat-raised-button color="accent" (click)="action = SEARCH_ACTION">Buscar por técnico</button>
+</div>
+
+<!-- Formulario de creación -->
+<app-create-schedule
+  *ngIf="action === CREATE_ACTION"
+  (formCompleted)="onScheduleCreated($event)">
+</app-create-schedule>
+
+<!-- Búsqueda por técnico -->
+<div *ngIf="action === SEARCH_ACTION" class="search-box">
+  <mat-form-field appearance="fill">
+    <mat-label>ID del Técnico</mat-label>
+    <input matInput [(ngModel)]="technicianId">
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="searchByTechnician()">Buscar</button>
+</div>
+
+<!-- Mensaje de éxito -->
+<div *ngIf="successMessage" class="success-message">
+  {{ successMessage }}
+</div>
+
+<!-- Resultados -->
+<app-schedule-view
+  *ngIf="schedules.length > 0"
+  [schedules]="schedules"
+  (delete)="onDelete($event)">
+</app-schedule-view>

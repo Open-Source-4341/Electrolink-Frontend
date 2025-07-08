@@ -1,0 +1,75 @@
+<mat-card>
+  <h2>Create New Request</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <mat-label>Property</mat-label>
+      <mat-select [(ngModel)]="request.propertyId" name="propertyId" required>
+        <mat-option *ngFor="let property of properties" [value]="property.id">
+          {{ property.name }} <!-- O usa 'address' o lo más representativo -->
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Service</mat-label>
+      <mat-select [(ngModel)]="request.serviceId" name="serviceId" required>
+        <mat-option *ngFor="let service of services" [value]="service.id">
+          {{ service.name }} <!-- Ajusta según tu entidad -->
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="request.problemDescription" name="problemDescription">
+    </mat-form-field>
+
+    <!-- Fecha programada -->
+    <mat-form-field class="full-width">
+      <mat-label>Scheduled Date</mat-label>
+      <input matInput [(ngModel)]="request.scheduledDate" name="scheduledDate" type="date">
+    </mat-form-field>
+
+    <!-- Bill -->
+    <h3>Bill</h3>
+
+    <mat-form-field class="full-width">
+      <mat-label>Billing Period</mat-label>
+      <input matInput [(ngModel)]="request.bill.billingPeriod" name="billingPeriod">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Energy Consumed (kWh)</mat-label>
+      <input matInput type="number" [(ngModel)]="request.bill.energyConsumed" name="energyConsumed">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Amount Paid (S/)</mat-label>
+      <input matInput type="number" [(ngModel)]="request.bill.amountPaid" name="amountPaid">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Bill Image URL</mat-label>
+      <input matInput [(ngModel)]="request.bill.billImageUrl" name="billImageUrl">
+    </mat-form-field>
+
+    <!-- Photos -->
+    <h3>Photo</h3>
+
+    <mat-form-field class="full-width">
+      <mat-label>Photo ID</mat-label>
+      <input matInput [(ngModel)]="photo.photoId" name="photoId">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Photo URL</mat-label>
+      <input matInput [(ngModel)]="photo.url" name="photoUrl">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+
+  <p *ngIf="message" class="message">{{ message }}</p>
+</mat-card>

@@ -1,0 +1,13 @@
+<mat-list role="list">
+  <div *ngFor="let property of properties">
+    <mat-list-item
+      role="listitem"
+      (click)="propertySelected.emit(property.id)"
+      [class.selected-item]="property.id === selectedPropertyId">
+      <mat-icon matListItemIcon>home</mat-icon>
+      <div matListItemTitle>{{ property.address.street }}</div>
+      <div matListItemLine>{{ property.district.name }}, {{ property.region.name }}</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
+</mat-list>

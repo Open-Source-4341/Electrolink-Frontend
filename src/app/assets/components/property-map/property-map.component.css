@@ -1,0 +1,18 @@
+/* property-map.component.css */
+
+/* :host asegura que el componente en sí mismo (app-property-map)
+   ocupe el espacio que su contenedor padre le asigne. */
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* .map-container aplica el estilo al <div> interno,
+   haciendo que llene el componente :host. */
+.map-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px; /* Opcional, pero se ve bien */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra sutil */
+}

@@ -1,0 +1,22 @@
+.list-container {
+  margin-top: 2rem;
+}
+
+table {
+  width: 100%;
+}
+
+.spinner-container, .no-items-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.component-id {
+  color: #777;
+  font-size: 0.8em;
+}
+
+.mat-mdc-row.low-stock {
+  background-color: #fff3e0;
+}

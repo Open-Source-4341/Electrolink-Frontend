@@ -1,0 +1,53 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas para cards */
+  gap: 24px;
+  padding: 0 24px;
+  align-items: start;
+  background-color: #E8EEF7;
+}
+
+
+
+/* Opcional: define cuántas columnas ocupa cada card si quieres más control */
+app-profile-card {
+  grid-column: 1 span 1;
+}
+
+app-schedule-card {
+  grid-column: 2 / span 1; /* ✅ colócala en columna 2 */
+}
+
+app-inventory-card {
+  grid-column: 3 span 1;
+}
+
+app-clients-history-card {
+  grid-column: 4 / span 1;
+}
+
+app-metrics-card {
+  grid-column: 1 / span 1; /* Columna 1 */
+  grid-row: 2;             /* Fila 2 */
+}
+
+app-portfolio-card {
+  grid-column: 2 / span 1; /* Segunda columna */
+  grid-row: 2; /* Segunda fila */
+}
+
+app-zones-card {
+  grid-column: 3 / span 1; /* Columna 3 */
+  grid-row: 2;             /* Fila 2 */
+}
+
+
+.dashboard-header {
+  background-color: #043873;
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+}

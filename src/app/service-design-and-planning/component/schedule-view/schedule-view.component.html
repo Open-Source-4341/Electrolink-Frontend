@@ -1,0 +1,21 @@
+<div class="schedules-container">
+  <h3 *ngIf="schedules.length > 0">Horarios encontrados</h3>
+  <p *ngIf="schedules.length === 0">No se encontraron horarios.</p>
+
+  <mat-card *ngFor="let sched of schedules" class="schedule-card">
+    <mat-card-header>
+      <mat-card-title>Horario #{{ sched.id }}</mat-card-title>
+      <mat-card-subtitle>{{ sched.day }}: {{ sched.startTime }} - {{ sched.endTime }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Técnico:</strong> {{ sched.technicianId }}</p>
+      <p><strong>Día:</strong> {{ sched.day }}</p>
+      <p><strong>Inicio:</strong> {{ sched.startTime }}</p>
+      <p><strong>Fin:</strong> {{ sched.endTime }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="edit.emit(sched)">Editar</button>
+      <button mat-button color="warn" (click)="delete.emit(sched.id)">Eliminar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

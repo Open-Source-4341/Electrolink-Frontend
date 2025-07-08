@@ -1,0 +1,100 @@
+<div class="monitoring-container">
+  <h1>Monitoreo de Operaciones de Servicio</h1>
+
+  <div *ngFor="let operation of serviceOperations" class="operation-row">
+    <div class="operation-container">
+
+      <!-- Fila superior -->
+      <div class="top-row">
+
+        <!-- Bloque Service Operation -->
+        <mat-card class="block service">
+          <mat-card-title>🛠️ Servicio</mat-card-title>
+          <mat-card-content>
+            <p><strong>Request ID:</strong> {{ operation.requestId }}</p>
+            <p><strong>Estado:</strong> {{ operation.currentStatus }}</p>
+            <button mat-stroked-button color="primary" (click)="updateStatus(operation)">
+              🔄 Cambiar Estado
+            </button>
+            <p><strong>Inicio:</strong> {{ operation.startedAt | date:'short' }}</p>
+            <p><strong>Fin:</strong> {{ operation.completedAt | date:'short' }}</p>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Reportes por RequestId -->
+        <ng-container *ngIf="reportsByRequest[operation.requestId] as reports">
+          <mat-card class="block report" *ngIf="reports.length > 0">
+            <mat-card-title>📋 Reportes</mat-card-title>
+            <mat-card-content>
+              <div *ngFor="let report of reports" class="report-line">
+                <!-- Info del reporte -->
+                <div class="report-info">
+                  <p><strong>Tipo:</strong> {{ report.description }}</p>
+                  <p><strong>Descripcion:</strong> {{ report.reportType }}</p>
+                </div>
+
+                <!-- Mostrar imagen o botón -->
+                <div class="report-photo">
+                  <ng-container *ngIf="reportPhotos[report.id]; else uploadPhoto">
+                    <img [src]="reportPhotos[report.id]" alt="Foto del reporte" width="150"
+                         style="border-radius: 8px; border: 1px solid #ccc;" />
+                  </ng-container>
+                  <ng-template #uploadPhoto>
+                    <button mat-stroked-button color="accent" (click)="selectPhoto(report.id)">Subir Foto</button>
+                    <input type="file" [id]="'photoInput-' + report.id" (change)="onPhotoSelected($event, report.id)" hidden />
+                  </ng-template>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </mat-card-content>
+          </mat-card>
+        </ng-container>
+
+        <!-- Botón Add Report -->
+        <div class="block actions">
+          <button mat-raised-button color="accent"
+                  (click)="openReportForm(operation.requestId)">
+            Añadir Reporte
+          </button>
+
+          <app-report-form
+            *ngIf="showReportForm && selectedRequestId === operation.requestId"
+            [requestId]="selectedRequestId"
+            (formCompleted)="onReportFormCompleted()">
+          </app-report-form>
+        </div>
+      </div>
+
+      <!-- Fila inferior -->
+      <div class="bottom-row">
+
+        <mat-card class="block ratings" *ngIf="ratingsByRequest[operation.requestId]; else addRatingBtn">
+          <mat-card-title>⭐ Calificación</mat-card-title>
+          <mat-card-content>
+            <p><strong>Score:</strong> {{ ratingsByRequest[operation.requestId]?.score }}</p>
+            <p><strong>Comentario:</strong> {{ ratingsByRequest[operation.requestId]?.comment }}</p>
+            <p><strong>Autor:</strong> {{ ratingsByRequest[operation.requestId]?.raterId }}</p>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Botón para añadir rating si no existe -->
+        <ng-template #addRatingBtn>
+          <div class="block add-rating" *ngIf="operation.currentStatus === 'COMPLETED' && !ratingsByRequest[operation.requestId]">
+            <button mat-stroked-button color="accent" (click)="selectForRating(operation)">
+              Añadir Calificación
+            </button>
+
+            <div *ngIf="selectedOperationId === operation.id">
+              <app-rating-form
+                [requestId]="operation.requestId"
+                [technicianId]="operation.technicianId"
+                (formCompleted)="onRatingSubmitted()">
+              </app-rating-form>
+            </div>
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+</div>

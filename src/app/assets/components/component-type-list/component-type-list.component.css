@@ -1,0 +1,27 @@
+.list-container {
+  margin-top: 2rem;
+}
+
+.spinner-container, .error-message, .no-items-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  color: #666;
+}
+
+mat-list-item {
+  height: auto !important;
+  padding: 0.75rem 0 !important;
+}
+
+mat-icon {
+  color: #007bff;
+}
+
+mat-divider {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}

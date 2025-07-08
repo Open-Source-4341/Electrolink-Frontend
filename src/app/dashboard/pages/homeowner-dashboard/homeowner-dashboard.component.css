@@ -1,0 +1,51 @@
+.dashboard-container {
+  position: relative;
+  padding: 2rem;
+  background-color: #f5f9fc;
+  min-height: 100vh;
+}
+
+.switch-button-container {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+}
+
+.dashboard-content {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 6rem;
+  text-align: center;
+  background-color: #fff;
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.highlight {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-button {
+  width: 220px;
+  font-weight: 600;
+}

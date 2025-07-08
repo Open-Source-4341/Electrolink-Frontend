@@ -1,0 +1,12 @@
+<div class="page-container">
+  <div class="form-section">
+    <app-component-type-form (typeAdded)="onTypeAdded()"></app-component-type-form>
+  </div>
+  <div class="list-section">
+    <app-component-type-list
+      [types]="types"
+      [isLoading]="isLoading"
+      [error]="error">
+    </app-component-type-list>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+/* Estilo para la barra de herramientas superior */
+.custom-toolbar {
+  background-color: #1976d2; /* Azul principal */
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto; /* Empuja los elementos a los extremos */
+}
+
+/* Estilo para los botones de la barra de herramientas */
+.change-role-button, .icon-button {
+  background-color: #ffe082 !important; /* Amarillo claro */
+  color: #1976d2 !important;       /* Azul medio */
+  border: 1px solid #1976d2;
+  margin-left: 8px;
+}
+
+.icon-button mat-icon {
+  font-size: 20px;
+}
+
+/* Contenedor para los botones de navegación */
+.navigation-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #ffe082; /* Fondo amarillo para la barra de botones */
+}
+
+/* Estilo para los botones de navegación (Inicio, Peticiones, etc.) */
+.nav-button {
+  background-color: white !important;
+  color: #1976d2 !important;
+  border: 1px solid #1976d2 !important;
+  font-weight: 500;
+}
+
+/* Estilo para el enlace activo */
+.active-link {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
+
+/* Contenedor principal del contenido */
+.main-content {
+  padding: 2rem;
+  background-color: #f0f4f8; /* Un color de fondo suave */
+  min-height: calc(100vh - 128px); /* Ajusta la altura para ocupar el espacio restante */
+}

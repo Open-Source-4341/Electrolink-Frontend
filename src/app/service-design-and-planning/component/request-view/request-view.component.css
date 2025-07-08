@@ -1,0 +1,15 @@
+.container {
+  padding: 2rem;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.request-card {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+}

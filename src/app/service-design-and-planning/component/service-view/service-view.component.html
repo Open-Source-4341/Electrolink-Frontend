@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Available Services</h2>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <mat-card *ngFor="let service of services" class="service-card">
+    <mat-card-header>
+      <mat-card-title>{{ service.name }}</mat-card-title>
+      <mat-card-subtitle>{{ service.category }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Description:</strong> {{ service.description }}</p>
+      <p><strong>Base Price:</strong> S/ {{ service.basePrice }}</p>
+      <p><strong>Estimated Duration:</strong> {{ service.estimatedDuration }} min</p>
+    </mat-card-content>
+  </mat-card>
+</div>

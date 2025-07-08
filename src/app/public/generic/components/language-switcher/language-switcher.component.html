@@ -1,0 +1,13 @@
+<div class="language-switcher">
+  <mat-button-toggle-group [value]="currentLang" appearance="standard" aria-label="Preferred Language" name="language" style="background-color: #ffe082;" >
+    @for (language of languages; track language) {
+      <mat-button-toggle (click)="useLanguage(language)"
+                         [aria-label]="language"
+                         [value]="language"
+                         class="blue"
+      >{{ language.toUpperCase() }}
+      </mat-button-toggle>
+    }
+  </mat-button-toggle-group>
+</div>
+

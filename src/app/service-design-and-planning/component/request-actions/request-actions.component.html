@@ -1,0 +1,139 @@
+<div class="button-group">
+  <button mat-raised-button color="primary" (click)="action = 'create'">Crear petición</button>
+  <button mat-raised-button color="accent" (click)="action = 'searchById'">Buscar por ID</button>
+  <button mat-raised-button color="warn" (click)="action = 'searchByClient'">Buscar por Cliente</button>
+</div>
+
+<!-- Crear petición -->
+<app-create-request *ngIf="action === 'create'"></app-create-request>
+
+<!-- Buscar por ID -->
+<div *ngIf="action === 'searchById'" class="search-box">
+  <mat-form-field appearance="fill">
+    <mat-label>ID de Petición</mat-label>
+    <input matInput [(ngModel)]="requestId">
+  </mat-form-field>
+  <button mat-stroked-button color="primary" (click)="searchById()">Buscar</button>
+</div>
+
+<!-- Buscar por Cliente -->
+<div *ngIf="action === 'searchByClient'" class="search-box">
+  <mat-form-field appearance="fill">
+    <mat-label>ID de Cliente</mat-label>
+    <input matInput [(ngModel)]="clientId">
+  </mat-form-field>
+  <button mat-stroked-button color="accent" (click)="searchByClient()">Buscar</button>
+</div>
+
+<!-- Mostrar resultado -->
+<mat-card *ngIf="selectedRequest" class="result-card">
+  <mat-card-title>Editar Petición: {{ selectedRequest.id }}</mat-card-title>
+  <mat-card-content>
+    <!-- Cliente -->
+    <mat-form-field class="full-width">
+      <mat-label>Cliente ID</mat-label>
+      <input matInput [(ngModel)]="selectedRequest.clientId" name="editClientId">
+    </mat-form-field>
+
+    <!-- Técnico -->
+    <mat-form-field class="full-width">
+      <mat-label>Técnico ID</mat-label>
+      <input matInput [(ngModel)]="selectedRequest.technicianId" name="editTechnicianId">
+    </mat-form-field>
+
+    <!-- Propiedad -->
+    <mat-form-field class="full-width">
+      <mat-label>Propiedad ID</mat-label>
+      <input matInput [(ngModel)]="selectedRequest.propertyId" name="editPropertyId">
+    </mat-form-field>
+
+    <!-- Servicio -->
+    <mat-form-field class="full-width">
+      <mat-label>Servicio ID</mat-label>
+      <input matInput [(ngModel)]="selectedRequest.serviceId" name="editServiceId">
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field class="full-width">
+      <mat-label>Descripción</mat-label>
+      <input matInput [(ngModel)]="selectedRequest.problemDescription" name="editDescription">
+    </mat-form-field>
+
+    <!-- Fecha programada -->
+    <mat-form-field class="full-width">
+      <mat-label>Fecha Programada</mat-label>
+      <input matInput [(ngModel)]="selectedRequest.scheduledDate" name="editScheduledDate" type="date">
+    </mat-form-field>
+
+    <!-- Factura -->
+    <h3>Factura</h3>
+
+    <mat-form-field class="full-width">
+      <mat-label>Periodo</mat-label>
+      <input matInput [(ngModel)]="selectedRequest.bill.billingPeriod" name="editBillingPeriod">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Consumo (kWh)</mat-label>
+      <input matInput type="number" [(ngModel)]="selectedRequest.bill.energyConsumed" name="editEnergyConsumed">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Monto Pagado (S/)</mat-label>
+      <input matInput type="number" [(ngModel)]="selectedRequest.bill.amountPaid" name="editAmountPaid">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Imagen del Recibo</mat-label>
+      <input matInput [(ngModel)]="selectedRequest.bill.billImageUrl" name="editBillImageUrl">
+    </mat-form-field>
+
+    <!-- Fotos -->
+    <h3>Fotos</h3>
+
+    <div *ngFor="let photo of selectedRequest.photos; let i = index">
+      <mat-form-field class="full-width">
+        <mat-label>Photo ID</mat-label>
+        <input matInput [(ngModel)]="selectedRequest.photos[i].photoId" [name]="'photoId' + i">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Photo URL</mat-label>
+        <input matInput [(ngModel)]="selectedRequest.photos[i].url" [name]="'photoUrl' + i">
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="updateRequest()">Guardar Cambios</button>
+    <button mat-raised-button color="warn" (click)="deleteRequest()">Eliminar</button>
+  </mat-card-actions>
+</mat-card>
+
+
+<!-- Mostrar múltiples resultados por cliente -->
+<mat-card *ngFor="let req of selectedRequests" class="result-card">
+  <mat-card-title>Petición: {{ req.id }}</mat-card-title>
+  <mat-card-content>
+    <p><strong>Cliente:</strong> {{ req.clientId }}</p>
+    <p><strong>Técnico:</strong> {{ req.technicianId }}</p>
+    <p><strong>Propiedad:</strong> {{ req.propertyId }}</p>
+    <p><strong>Servicio:</strong> {{ req.serviceId }}</p>
+    <p><strong>Descripción:</strong> {{ req.problemDescription }}</p>
+    <p><strong>Fecha programada:</strong> {{ req.scheduledDate }}</p>
+    <p><strong>Estado:</strong> {{ req.status }}</p>
+
+    <h4>Factura</h4>
+    <p><strong>Periodo:</strong> {{ req.bill?.billingPeriod }}</p>
+    <p><strong>Consumo:</strong> {{ req.bill?.energyConsumed }} kWh</p>
+    <p><strong>Monto:</strong> S/ {{ req.bill?.amountPaid }}</p>
+    <p><strong>Recibo:</strong> <a [href]="req.bill?.billImageUrl" target="_blank">{{ req.bill?.billImageUrl }}</a></p>
+
+    <h4>Fotos</h4>
+    <div *ngFor="let photo of req.photos">
+      <p><strong>ID:</strong> {{ photo.photoId }}</p>
+      <p><strong>URL:</strong> <a [href]="photo.url" target="_blank">{{ photo.url }}</a></p>
+    </div>
+  </mat-card-content>
+</mat-card>
+

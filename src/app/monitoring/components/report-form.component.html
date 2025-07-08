@@ -1,0 +1,25 @@
+<mat-card class="report-form">
+  <mat-card-title>📝 Nuevo Reporte</mat-card-title>
+  <mat-card-content>
+
+    <!-- Tipo de Reporte como radio group -->
+    <mat-label style="margin-bottom: 8px; display: block;">Selecciona el tipo:</mat-label>
+    <mat-radio-group [(ngModel)]="reportType" name="reportType">
+      <mat-radio-button *ngFor="let type of typeOptions" [value]="type" style="margin-right: 16px;">
+        {{ type }}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <!-- Descripción -->
+    <mat-form-field appearance="fill" class="full-width" style="margin-top: 16px;">
+      <mat-label>Describe el problema...</mat-label>
+      <textarea matInput [(ngModel)]="description" rows="3"></textarea>
+    </mat-form-field>
+
+    <!-- Botón de guardar -->
+    <div style="margin-top: 12px;">
+      <button mat-flat-button color="primary" (click)="submit()">Guardar</button>
+    </div>
+
+  </mat-card-content>
+</mat-card>

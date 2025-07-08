@@ -1,0 +1,12 @@
+<div class="page-container">
+  <h2>Gestión de Horarios</h2>
+
+  <app-schedule-actions (schedulesFound)="updateSchedules($event)"></app-schedule-actions>
+
+  <app-create-schedule
+    *ngIf="selectedSchedule"
+    [schedule]="selectedSchedule"
+    (formCompleted)="onScheduleSaved()"
+    (cancel)="onCancelEdit()">
+  </app-create-schedule>
+</div>

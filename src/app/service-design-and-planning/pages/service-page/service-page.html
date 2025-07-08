@@ -1,0 +1,16 @@
+<mat-card>
+  <h1>Servicios</h1>
+  <mat-divider></mat-divider>
+
+  <!-- Botones para alternar -->
+  <div style="margin: 16px 0;">
+    <button mat-raised-button color="primary" (click)="toggleView('view')">Ver servicios</button>
+    <button mat-raised-button color="accent" (click)="toggleView('create')">Crear servicio</button>
+  </div>
+
+  <!-- Vista dinámica -->
+  <div>
+    <app-service-view *ngIf="viewMode === 'view'"></app-service-view>
+    <app-service-create *ngIf="viewMode === 'create'"></app-service-create>
+  </div>
+</mat-card>

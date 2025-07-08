@@ -1,0 +1,15 @@
+.page-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Para pantallas más pequeñas */
+@media (max-width: 960px) {
+  .page-container {
+    grid-template-columns: 1fr;
+  }
+}

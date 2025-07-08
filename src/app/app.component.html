@@ -1,0 +1,21 @@
+<mat-toolbar>
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  <button mat-button (click)="goToSignIn()">Sign In</button>
+  <button mat-button (click)="goToSignUp()">Sign Up</button>
+  <button mat-button (click)="changeMenu()">
+    {{ changeMenuLabel | translate }}
+  </button>
+</mat-toolbar>
+
+<nav>
+  <a
+    *ngFor="let item of activeItems"
+    [routerLink]="item.to"
+    routerLinkActive="active"
+    mat-button>
+    {{ item.label | translate }}
+  </a>
+</nav>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,45 @@
+<mat-card class="rating-card">
+  <mat-card-title>⭐ Dejar una calificación</mat-card-title>
+  <mat-card-content>
+    <form (ngSubmit)="submit()" #form="ngForm">
+      <!-- Puntaje -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Puntaje (1 al 5)</mat-label>
+        <input
+          matInput
+          type="number"
+          name="score"
+          [(ngModel)]="score"
+          min="1"
+          max="5"
+          required />
+      </mat-form-field>
+
+      <!-- Comentario -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Comentario</mat-label>
+        <textarea
+          matInput
+          name="comment"
+          [(ngModel)]="comment"
+          rows="3"
+          required>
+        </textarea>
+      </mat-form-field>
+
+      <!-- Autor -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Autor de la calificación</mat-label>
+        <input
+          matInput
+          name="raterId"
+          [(ngModel)]="raterId"
+          required />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        Enviar Calificación
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

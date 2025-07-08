@@ -1,0 +1,10 @@
+<div>
+  <div class="grid-container">
+    <app-component-form (componentCreated)="onComponentCreated()"></app-component-form>
+    <app-component-list
+      [components]="components"
+      [isLoading]="isLoading"
+      [error]="error"
+    ></app-component-list>
+  </div>
+</div>

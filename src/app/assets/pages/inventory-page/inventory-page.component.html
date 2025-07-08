@@ -1,0 +1,26 @@
+<div class="page-container">
+  <h1>Inventario del Técnico</h1>
+  <p>ID del Técnico: <strong>{{ technicianId }}</strong></p>
+
+  <div class="grid-container">
+    <div class="form-section">
+      <!-- <app-inventory-add-item-form (addItem)="onAddItem($event)"></app-inventory-add-item-form> -->
+      <app-technician-inventory-form
+        (itemAdded)="onAddItem($event)">
+      </app-technician-inventory-form>
+    </div>
+
+    <div class="list-section">
+      <div *ngIf="error" class="error-message">
+        <p>{{ error }}</p>
+      </div>
+      <app-inventory-list
+        [inventoryItems]="inventory?.stockItems"
+        [isLoading]="isLoading"
+        (updateQuantity)="onUpdateQuantity($event)"
+        (removeItem)="onRemoveItem($event)">
+      </app-inventory-list>
+    </div>
+  </div>
+
+</div>

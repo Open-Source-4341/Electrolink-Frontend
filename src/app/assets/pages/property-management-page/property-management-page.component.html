@@ -1,0 +1,29 @@
+<div class="page-container">
+  <div class="map-panel">
+    <app-property-map
+      [properties]="properties$ | async"
+      (propertySelected)="onPropertySelected($event)">
+    </app-property-map>
+  </div>
+
+  <div class="list-details-panel">
+    <div class="list-section">
+      <div class="list-header">
+        <h2>Propiedades</h2>
+        <button mat-fab color="primary" aria-label="Agregar Propiedad" (click)="openCreateDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <app-property-list
+        [properties]="properties$ | async"
+        [selectedPropertyId]="selectedProperty?.id || null"
+        (propertySelected)="onPropertySelected($event)">
+      </app-property-list>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="details-section">
+       <h2>Detalles</h2>
+      <app-property-detail [property]="selectedProperty"></app-property-detail>
+    </div>
+  </div>
+</div>

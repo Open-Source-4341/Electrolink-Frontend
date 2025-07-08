@@ -1,0 +1,51 @@
+<mat-card class="component-form-container">
+  <mat-card-header id="header-1">
+    <mat-card-title>Crear Nuevo Componente Eléctrico</mat-card-title>
+    <mat-card-subtitle>Completa los datos para registrar un nuevo componente.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="componentForm" (ngSubmit)="onSubmit()" class="form-layout">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del Componente</mat-label>
+        <input matInput formControlName="name" placeholder="Ej: Resistencia 10k Ohm" required>
+        <mat-error *ngIf="componentForm.get('name')?.hasError('required')">El nombre es requerido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="description" rows="3"
+                  placeholder="Ej: Resistencia de carbón, 1/4W, 5% tolerancia"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de Componente</mat-label>
+        <mat-select formControlName="componentTypeId" required>
+          <mat-option *ngIf="isLoadingTypes" disabled>Cargando tipos...</mat-option>
+          <mat-option *ngFor="let type of componentTypes" [value]="type.componentTypeId">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="componentForm.get('componentTypeId')?.hasError('required')">Debe seleccionar un tipo.</mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="isActive" color="primary">
+        Componente Activo
+      </mat-slide-toggle>
+
+      <div class="form-actions">
+        <div>
+          <a href="/component-type" mat-flat-button color="primary" type="button">Ir Tipos de Componente</a>
+        </div>
+        <button mat-flat-button color="primary" type="submit" [disabled]="componentForm.invalid || isLoading">
+          {{ isLoading ? 'Creando...' : 'Crear Componente' }}
+        </button>
+      </div>
+
+      
+
+      <div *ngIf="errorMessage" class="error-text">
+        <strong>Error al crear:</strong> {{ errorMessage }}
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

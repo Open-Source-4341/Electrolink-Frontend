@@ -1,0 +1,34 @@
+<h3>{{ schedule.id && schedule.id > 0 ? 'Actualizar horario' : 'Crear nuevo horario' }}</h3>
+
+<form (ngSubmit)="onSubmit()">
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>ID del Técnico</mat-label>
+    <input matInput type="number" [(ngModel)]="schedule.technicianId" name="technicianId" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Día</mat-label>
+    <input matInput [(ngModel)]="schedule.day" name="day" required placeholder="Ej: Monday">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Hora de inicio</mat-label>
+    <input matInput [(ngModel)]="schedule.startTime" name="startTime" required placeholder="HH:mm">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Hora de fin</mat-label>
+    <input matInput [(ngModel)]="schedule.endTime" name="endTime" required placeholder="HH:mm">
+  </mat-form-field>
+
+
+
+  <div class="button-group">
+    <button mat-raised-button color="primary" type="submit">
+      {{ schedule.id && schedule.id > 0 ? 'Actualizar' : 'Crear' }}
+    </button>
+    <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+  </div>
+</form>
